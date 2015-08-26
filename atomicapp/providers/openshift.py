@@ -37,7 +37,7 @@ class OpenShiftProvider(Provider):
     config_file = None
     template_data = None
 
-    def init(self):
+    def init(self):  # pragma: no cover
         self.cli = find_executable(self.cli_str)
         if self.container and not self.cli:
             host_path = []
@@ -67,7 +67,7 @@ class OpenShiftProvider(Provider):
                 "'openshiftconfig = /path/to/your/.kube/config' in the "
                 "[general] section of the answers.conf file." % self.config_file)
 
-    def _callCli(self, path):
+    def _callCli(self, path):  # pragma: no cover
         cmd = [self.cli, "--config=%s" % self.config_file, "create", "-f", path]
 
         if self.dryrun:
@@ -111,7 +111,7 @@ class OpenShiftProvider(Provider):
 
         super(self.__class__, self).saveArtifact(path, data)
 
-    def deploy(self):
+    def deploy(self):  # pragma: no cover
         kube_order = OrderedDict(
             [("service", None), ("rc", None), ("pod", None)])  # FIXME
         for artifact in self.artifacts:
